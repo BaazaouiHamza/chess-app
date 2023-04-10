@@ -3,12 +3,13 @@ import "./Tile.css";
 
 type Props = {
   number: number;
+  image?: string;
 };
 
-const Tile: FC<Props> = ({ number }) => {
+const Tile: FC<Props> = ({ number, image }) => {
   return (
     <div className={`tile ${number % 2 === 0 ? "black-tile" : "white-tile"}`}>
-      <img src="assets/images/bishop_b.png" />
+      <img src={image} />
     </div>
   );
 };
