@@ -1,5 +1,4 @@
-import React from "react";
-
+import Tile from "../Tile/Tile";
 import "./Chessboard.css";
 
 const verticalAxis = ["1", "2", "3", "4", "5", "6", "7", "8"];
@@ -11,10 +10,7 @@ const ChessBoard = () => {
   for (let j = verticalAxis.length - 1; j >= 0; j--) {
     for (let i = 0; i < horizontalAxis.length; i++) {
       const number = j + i;
-      board.push(
-        <div className={`tile ${number % 2 === 0 ? "black-tile" : "white-tile"}`}>
-        </div>
-      );
+      board.push(<Tile number={number} />);
     }
   }
   return <div id="chessboard">{board}</div>;
