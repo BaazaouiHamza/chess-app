@@ -9,7 +9,12 @@ type Props = {
 const Tile: FC<Props> = ({ number, image }) => {
   return (
     <div className={`tile ${number % 2 === 0 ? "black-tile" : "white-tile"}`}>
-      <img src={image} />
+      {image && (
+        <div
+          className="chess-piece"
+          style={{ backgroundImage: `url(${image})` }}
+        ></div>
+      )}
     </div>
   );
 };

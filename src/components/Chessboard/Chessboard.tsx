@@ -20,7 +20,7 @@ for (let p = 0; p < 2; p++) {
   pieces.push({ image: `assets/images/rook_${type}.png`, x: 7, y: y });
   pieces.push({ image: `assets/images/knight_${type}.png`, x: 1, y: y });
   pieces.push({ image: `assets/images/knight_${type}.png`, x: 6, y: y });
-  pieces.push({ image: `assets/images/bishop_${type}.png`, x: 2, y: y});
+  pieces.push({ image: `assets/images/bishop_${type}.png`, x: 2, y: y });
   pieces.push({ image: `assets/images/bishop_${type}.png`, x: 5, y: y });
   pieces.push({ image: `assets/images/king_${type}.png`, x: 4, y: y });
   pieces.push({ image: `assets/images/queen_${type}.png`, x: 3, y: y });
@@ -48,7 +48,7 @@ const ChessBoard = () => {
         }
       });
 
-      board.push(<Tile number={number} image={image} />);
+      board.push(<Tile key={`${j}.${i}`} number={number} image={image} />);
     }
   }
   return <div id="chessboard">{board}</div>;
