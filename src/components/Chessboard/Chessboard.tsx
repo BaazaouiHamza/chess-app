@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Tile from "../Tile/Tile";
 import "./Chessboard.css";
 
@@ -11,31 +11,64 @@ interface Piece {
   y: number;
 }
 
-const pieces: Piece[] = [];
+const initialBoradState: Piece[] = [];
 
 for (let p = 0; p < 2; p++) {
   const type = p === 0 ? "b" : "w";
   const y = p === 0 ? 7 : 0;
 
-  pieces.push({ image: `assets/images/rook_${type}.png`, x: 0, y: y });
-  pieces.push({ image: `assets/images/rook_${type}.png`, x: 7, y: y });
-  pieces.push({ image: `assets/images/knight_${type}.png`, x: 1, y: y });
-  pieces.push({ image: `assets/images/knight_${type}.png`, x: 6, y: y });
-  pieces.push({ image: `assets/images/bishop_${type}.png`, x: 2, y: y });
-  pieces.push({ image: `assets/images/bishop_${type}.png`, x: 5, y: y });
-  pieces.push({ image: `assets/images/king_${type}.png`, x: 4, y: y });
-  pieces.push({ image: `assets/images/queen_${type}.png`, x: 3, y: y });
+  initialBoradState.push({
+    image: `assets/images/rook_${type}.png`,
+    x: 0,
+    y: y,
+  });
+  initialBoradState.push({
+    image: `assets/images/rook_${type}.png`,
+    x: 7,
+    y: y,
+  });
+  initialBoradState.push({
+    image: `assets/images/knight_${type}.png`,
+    x: 1,
+    y: y,
+  });
+  initialBoradState.push({
+    image: `assets/images/knight_${type}.png`,
+    x: 6,
+    y: y,
+  });
+  initialBoradState.push({
+    image: `assets/images/bishop_${type}.png`,
+    x: 2,
+    y: y,
+  });
+  initialBoradState.push({
+    image: `assets/images/bishop_${type}.png`,
+    x: 5,
+    y: y,
+  });
+  initialBoradState.push({
+    image: `assets/images/king_${type}.png`,
+    x: 4,
+    y: y,
+  });
+  initialBoradState.push({
+    image: `assets/images/queen_${type}.png`,
+    x: 3,
+    y: y,
+  });
 }
 
 for (let i = 0; i < 8; i++) {
-  pieces.push({ image: "assets/images/pawn_b.png", x: i, y: 6 });
+  initialBoradState.push({ image: "assets/images/pawn_b.png", x: i, y: 6 });
 }
 
 for (let i = 0; i < 8; i++) {
-  pieces.push({ image: "assets/images/pawn_w.png", x: i, y: 1 });
+  initialBoradState.push({ image: "assets/images/pawn_w.png", x: i, y: 1 });
 }
 
 const ChessBoard = () => {
+  const [pieces, setPieces] = useState<Piece[]>(initialBoradState);
   const chessboardRef = useRef<HTMLDivElement>(null);
 
   let activePiece: HTMLElement | null = null;
@@ -74,6 +107,15 @@ const ChessBoard = () => {
 
   const dropPiece = (e: React.MouseEvent) => {
     if (activePiece) {
+      setPieces((value) => {
+        const pieces = value.map((p) => {
+          if (p.x === 0 && p.y === 0) {
+            p.x = 5;
+          }
+          return p;
+        });
+        return pieces;
+      });
       activePiece = null;
     }
   };
