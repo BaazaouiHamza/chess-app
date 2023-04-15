@@ -106,7 +106,11 @@ const ChessBoard = () => {
   };
 
   const dropPiece = (e: React.MouseEvent) => {
-    if (activePiece) {
+    const chessboard = chessboardRef.current;
+    if (activePiece && chessboard) {
+      const x = Math.abs((e.clientY - chessboard.offsetLeft - 800) / 100);
+      const y = Math.abs((e.clientY - chessboard.offsetTop - 800) / 100);
+      console.log(x, y);
       setPieces((value) => {
         const pieces = value.map((p) => {
           if (p.x === 0 && p.y === 0) {
